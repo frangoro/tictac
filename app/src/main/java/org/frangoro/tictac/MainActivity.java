@@ -13,17 +13,17 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String INITIAL_RESET_TIMER = "35";
-    private static final String INITIAL_ALARM_TIMER = "30";
+    private static final String INITIAL_RESET_TIMER = "0";
+    private static final String INITIAL_ALARM_TIMER = "3";
 
     private Chronometer chronometer;
     private Button startPauseButton;
     private EditText resetTimer;
     private EditText alarmTimer;
     private boolean running;
-    private boolean timeOver;
     private long pauseOffset;
-
+    private Long alarmTimerSeconds;
+    private Long resetTimerSeconds;
     MediaPlayer alarmSound;
     MediaPlayer resetSound;
 
@@ -34,11 +34,12 @@ public class MainActivity extends AppCompatActivity {
 
         alarmSound = MediaPlayer.create(MainActivity.this, R.raw.bubble);
         resetSound = MediaPlayer.create(MainActivity.this, R.raw.win95);
-
         chronometer = findViewById(R.id.chronometer);
         startPauseButton = findViewById(R.id.startPauseButton);
         resetTimer = findViewById(R.id.resetTimer);
         alarmTimer = findViewById(R.id.alarmTimer);
+
+        // Initialize
         resetTimer.setText(INITIAL_RESET_TIMER);
         alarmTimer.setText(INITIAL_ALARM_TIMER);
 
@@ -58,25 +59,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Reset program
         chronometer.setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
             @Override
             public void onChronometerTick(Chronometer chronometer) {
-                if (alarmTimer.getText() != null && !alarmTimer.getText().toString().isEmpty()
-                        && (SystemClock.elapsedRealtime() - chronometer.getBase())
-                        >= Long.parseLong(alarmTimer.getText().toString()) * 1000) {
-                    if (!timeOver) {
-                        Toast.makeText(MainActivity.this, "Time over!", Toast.LENGTH_LONG).show();
-                        alarmSound.start();
-                        timeOver = true;
-                    }
-                    if (resetTimer.getText() != null && !resetTimer.getText().toString().isEmpty()
-                            && (SystemClock.elapsedRealtime() - chronometer.getBase())
-                            >= Long.parseLong(resetTimer.getText().toString()) * 1000) {
-                        chronometer.setBase(SystemClock.elapsedRealtime());
-                        resetSound.start();
-                        Toast.makeText(MainActivity.this, "Again!", Toast.LENGTH_LONG).show();
-                        timeOver = false;
-                    }
+                Long elapsedSeconds = Long.valueOf(Math.round((SystemClock.elapsedRealtime() - chronometer.getBase()) / 1000));
+                alarmTimerSeconds = alarmTimer.getText() != null && !alarmTimer.getText().toString().isEmpty() ? (Long.parseLong(alarmTimer.getText().toString())) : 0;
+                resetTimerSeconds = alarmTimer.getText() != null && !resetTimer.getText().toString().isEmpty() ? (Long.parseLong(resetTimer.getText().toString())) : 0;
+                if (elapsedSeconds != 0 && alarmTimerSeconds != 0 && elapsedSeconds % alarmTimerSeconds == 0) {
+                    Toast.makeText(MainActivity.this, "Time over!", Toast.LENGTH_LONG).show();
+                    alarmSound.start();
+                }
+                if (elapsedSeconds != 0 && resetTimerSeconds != 0 && elapsedSeconds % resetTimerSeconds == 0) {
+                    chronometer.setBase(SystemClock.elapsedRealtime());
+                    Toast.makeText(MainActivity.this, "Again!", Toast.LENGTH_LONG).show();
+                    resetSound.start();
                 }
             }
         });
@@ -102,4 +99,5 @@ public class MainActivity extends AppCompatActivity {
         chronometer.setBase(SystemClock.elapsedRealtime());
         pauseOffset = 0;
     }
+
 }

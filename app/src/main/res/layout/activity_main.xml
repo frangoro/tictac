@@ -3,15 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
+    android:gravity="center|top"
     android:orientation="vertical"
+    android:paddingTop="20sp"
     tools:context=".MainActivity">
 
     <Chronometer
         android:id="@+id/chronometer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5sp"
+        android:layout_marginBottom="50sp"
+        android:paddingBottom="50sp"
         android:textSize="100sp" />
 
     <Button
@@ -29,22 +31,45 @@
         android:onClick="resetChronometer"
         android:text="@string/reset" />
 
-    <EditText
-        android:id="@+id/resetTimer"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5sp"
-        android:autofillHints=""
-        android:hint="@string/reset_time_in_seconds"
-        android:inputType="number" />
+        android:layout_margin="5sp">
 
-    <EditText
-        android:id="@+id/alarmTimer"
+        <TextView
+            android:id="@+id/textViewAlarm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/alarm_time_in_seconds_text" />
+
+        <EditText
+            android:id="@+id/alarmTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10sp"
+            android:inputType="number" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5sp"
-        android:autofillHints=""
-        android:hint="@string/alarm_time_in_seconds"
-        android:inputType="number" />
+        android:layout_margin="5sp">
+
+        <TextView
+            android:id="@+id/textViewReset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/reset_time_in_seconds_text" />
+
+        <EditText
+            android:id="@+id/resetTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10sp"
+            android:layout_marginRight="10sp"
+            android:inputType="number" />
+
+    </LinearLayout>
 
 </LinearLayout>
