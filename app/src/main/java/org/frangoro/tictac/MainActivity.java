@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String INITIAL_RESET_TIMER = "0";
-    private static final String INITIAL_ALARM_TIMER = "3";
+    private static final String INITIAL_RESET_TIMER = "35";
+    private static final String INITIAL_ALARM_TIMER = "30";
 
     private Chronometer chronometer;
     private Button startPauseButton;
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         alarmSound = MediaPlayer.create(MainActivity.this, R.raw.bubble);
-        resetSound = MediaPlayer.create(MainActivity.this, R.raw.win95);
+        resetSound = MediaPlayer.create(MainActivity.this, R.raw.bubble);
         chronometer = findViewById(R.id.chronometer);
         startPauseButton = findViewById(R.id.startPauseButton);
         resetTimer = findViewById(R.id.resetTimer);
