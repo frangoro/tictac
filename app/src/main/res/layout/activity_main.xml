@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     android:gravity="center|top"
     android:orientation="vertical"
     android:paddingTop="20sp"
@@ -14,6 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="50sp"
         android:paddingBottom="50sp"
+        android:textColor="@android:color/holo_green_light"
+        android:textColorHint="@android:color/holo_green_light"
         android:textSize="100sp" />
 
     <Button
@@ -40,14 +43,18 @@
             android:id="@+id/textViewAlarm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/alarm_time_in_seconds_text" />
+            android:text="@string/alarm_time_in_seconds_text"
+            android:textColor="@android:color/holo_green_light"
+            android:textColorHint="@android:color/holo_green_light" />
 
         <EditText
             android:id="@+id/alarmTimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textColor="@android:color/holo_green_light"
+            android:textColorHint="@android:color/holo_green_light" />
 
     </LinearLayout>
 
@@ -60,7 +67,9 @@
             android:id="@+id/textViewReset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/reset_time_in_seconds_text" />
+            android:text="@string/reset_time_in_seconds_text"
+            android:textColor="@android:color/holo_green_light"
+            android:textColorHint="@android:color/holo_green_light" />
 
         <EditText
             android:id="@+id/resetTimer"
@@ -68,7 +77,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10sp"
             android:layout_marginRight="10sp"
-            android:inputType="number" />
+            android:inputType="number"
+            android:textColor="@android:color/holo_green_light"
+            android:textColorHint="@android:color/holo_green_light" />
 
     </LinearLayout>
 
